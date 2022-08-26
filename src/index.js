@@ -1,4 +1,5 @@
 import { apiKey } from './config';
+import './styles.css';
 
 const locationInput = document.querySelector('#location');
 const submit = document.querySelector('#submit');
