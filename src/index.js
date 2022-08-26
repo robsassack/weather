@@ -16,6 +16,12 @@ async function getWeather(location) {
   return data;
 }
 
+async function getWeatherCoords(coords) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey.key}`);
+  const data = await response.json();
+  return data;
+}
+
 function displayData(data) {
   content.textContent = '';
 
@@ -59,10 +65,24 @@ function displayData(data) {
   content.appendChild(wind);
 }
 
-getWeather('Detroit').then((data) => {
-  console.log(data);
-  displayData(data);
-});
+navigator.geolocation.getCurrentPosition(
+  (position) => {
+    // geolocation allowed
+    const coords = {
+      lat: position.coords.latitude,
+      lon: position.coords.longitude,
+    };
+    getWeatherCoords(coords).then((data) => {
+      displayData(data);
+    });
+  },
+  () => {
+    // geolocation denied
+    getWeather('Detroit').then((data) => {
+      displayData(data);
+    });
+  },
+);
 
 submit.addEventListener('click', () => {
   getWeather(locationInput.value).then((data) => {
