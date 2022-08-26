@@ -1,5 +1,6 @@
 import { apiKey } from './config';
 import './styles.css';
+import 'weather-icons/css/weather-icons.css';
 
 const locationInput = document.querySelector('#location');
 const submit = document.querySelector('#submit');
@@ -19,19 +20,52 @@ function meterSecToMilesHour(meterSec) {
   return (meterSec * 2.237).toFixed(0);
 }
 
+function conditionIcon(condition, time) {
+  switch (condition) {
+    default:
+      if (time === 'day') {
+        return 'wi-day-sunny';
+      }
+      return 'wi-night-clear';
+  }
+}
+
+function dayOrNight(time, sunrise, sunset) {
+  const currentTime = time / 1000;
+  if (currentTime >= sunrise && currentTime <= sunset) {
+    return 'day';
+  }
+  return 'night';
+}
+
 function displayData(data) {
   content.textContent = '';
 
   const location = document.createElement('h2');
-  location.textContent = `${data.name}, ${data.sys.country}`;
+  if (data.sys.country) {
+    location.textContent = `${data.name}, ${data.sys.country}`;
+  } else {
+    location.textContent = data.name;
+  }
   content.appendChild(location);
+
+  const weatherIcon = document.createElement('i');
+  weatherIcon.classList.add('wi');
+  const time = dayOrNight(Date.now(), data.sys.sunrise, data.sys.sunset);
+  const condition = data.weather[0].id;
+  weatherIcon.classList.add(conditionIcon(condition, time));
+  content.appendChild(weatherIcon);
 
   const temperature = document.createElement('p');
   temperature.textContent = `${kelvinToFahrenheit(data.main.temp)}°`;
   content.appendChild(temperature);
 
   const weather = document.createElement('p');
-  weather.textContent = `${data.weather[0].main} (${data.weather[0].description})`;
+  const weatherArr = [];
+  data.weather.forEach((weatherData) => {
+    weatherArr.push(`${weatherData.main} (${weatherData.description}) `);
+  });
+  weather.textContent = weatherArr.join('; ');
   content.appendChild(weather);
 
   const highLow = document.createElement('p');
