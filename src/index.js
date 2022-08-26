@@ -1,6 +1,10 @@
 import { apiKey } from './config';
 import './styles.css';
 import 'weather-icons/css/weather-icons.css';
+import conditionIcon from './conditionIcon';
+import {
+  dayOrNight, kelvinToFahrenheit, windDirection, meterSecToMilesHour,
+} from './conversions';
 
 const locationInput = document.querySelector('#location');
 const submit = document.querySelector('#submit');
@@ -10,32 +14,6 @@ async function getWeather(location) {
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey.key}`);
   const data = await response.json();
   return data;
-}
-
-function kelvinToFahrenheit(kelvin) {
-  return ((kelvin - 273.15) * 1.8 + 32).toFixed(0);
-}
-
-function meterSecToMilesHour(meterSec) {
-  return (meterSec * 2.237).toFixed(0);
-}
-
-function conditionIcon(condition, time) {
-  switch (condition) {
-    default:
-      if (time === 'day') {
-        return 'wi-day-sunny';
-      }
-      return 'wi-night-clear';
-  }
-}
-
-function dayOrNight(time, sunrise, sunset) {
-  const currentTime = time / 1000;
-  if (currentTime >= sunrise && currentTime <= sunset) {
-    return 'day';
-  }
-  return 'night';
 }
 
 function displayData(data) {
@@ -63,7 +41,7 @@ function displayData(data) {
   const weather = document.createElement('p');
   const weatherArr = [];
   data.weather.forEach((weatherData) => {
-    weatherArr.push(`${weatherData.main} (${weatherData.description}) `);
+    weatherArr.push(`${weatherData.main} (${weatherData.description})`);
   });
   weather.textContent = weatherArr.join('; ');
   content.appendChild(weather);
@@ -77,7 +55,7 @@ function displayData(data) {
   content.appendChild(humidity);
 
   const wind = document.createElement('p');
-  wind.textContent = `Wind: ${meterSecToMilesHour(data.wind.speed)} mph`;
+  wind.textContent = `Wind: ${windDirection(data.wind.deg)} ${meterSecToMilesHour(data.wind.speed)} mph`;
   content.appendChild(wind);
 }
 
