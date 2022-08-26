@@ -7,8 +7,12 @@ export function meterSecToMilesHour(meterSec) {
 export function dayOrNight(time, sunrise, sunset) {
   const currentTime = time / 1000;
   if (currentTime >= sunrise && currentTime <= sunset) {
+    document.querySelector('body').style.backgroundColor = '#B0E6E8';
+    document.querySelector('body').style.color = 'black';
     return 'day';
   }
+  document.querySelector('body').style.backgroundColor = '#101028';
+  document.querySelector('body').style.color = 'white';
   return 'night';
 }
 export function windDirection(degrees) {
