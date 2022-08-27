@@ -8,4 +8,19 @@
 
 body {
   background-color: #B0E6E8;
+  padding: 20px 10%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.content {
+  padding: 20px;
+  outline: 2px solid black;
+  width: 200px;
+  border-radius: 5px;
 }
