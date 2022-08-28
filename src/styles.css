@@ -23,4 +23,26 @@ body {
   outline: 2px solid black;
   width: 200px;
   border-radius: 5px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, auto);
+
+  gap: 5px;
+  align-items: center;
+}
+
+h2, i, .temp {
+  text-align: center;
+}
+
+.content h2, .content p + p {
+  grid-column: 1 / 3;
+}
+
+i, .temp {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 40px;
 }

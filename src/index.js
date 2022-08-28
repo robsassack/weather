@@ -41,6 +41,7 @@ function displayData(data) {
   content.appendChild(weatherIcon);
 
   const temperature = document.createElement('p');
+  temperature.className = 'temp';
   temperature.textContent = `${kelvinToFahrenheit(data.main.temp)}°`;
   content.appendChild(temperature);
 
