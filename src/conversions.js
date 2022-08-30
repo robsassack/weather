@@ -8,11 +8,15 @@ export function dayOrNight(time, sunrise, sunset) {
   const currentTime = time / 1000;
   if (currentTime >= sunrise && currentTime <= sunset) {
     document.querySelector('body').style.backgroundColor = '#B0E6E8';
+    document.querySelector('body').style.transition = 'background-color 1000ms linear';
     document.querySelector('body').style.color = 'black';
+    document.querySelector('.content').style.outline = '2px solid black';
     return 'day';
   }
   document.querySelector('body').style.backgroundColor = '#101028';
+  document.querySelector('body').style.transition = 'background-color 1000ms linear';
   document.querySelector('body').style.color = 'white';
+  document.querySelector('.content').style.outline = '2px solid white';
   return 'night';
 }
 export function windDirection(degrees) {
