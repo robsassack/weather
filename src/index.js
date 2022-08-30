@@ -88,6 +88,11 @@ navigator.geolocation.getCurrentPosition(
 submit.addEventListener('click', () => {
   getWeather(locationInput.value).then((data) => {
     displayData(data);
-  });
+  })
+    .catch(() => {
+      const error = document.createElement('h2');
+      error.textContent = 'Location not found';
+      content.appendChild(error);
+    });
   locationInput.value = '';
 });
