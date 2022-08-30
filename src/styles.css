@@ -8,11 +8,19 @@
 
 body {
   background-color: #B0E6E8;
-  padding: 20px 10%;
+  padding: 20px 25%;
+}
+
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 20px 10%;
+  }
 }
 
 .header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
@@ -45,4 +53,22 @@ i, .temp {
   padding-top: 20px;
   padding-bottom: 10px;
   font-size: 40px;
+}
+
+#location {
+  background-color: #ffffff00;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  font-weight: 500;
+}
+
+#submit {
+  background-color: #ffffff00;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: 500;
 }

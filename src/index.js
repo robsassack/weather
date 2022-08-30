@@ -80,7 +80,6 @@ navigator.geolocation.getCurrentPosition(
   () => {
     // geolocation denied
     getWeather('Detroit').then((data) => {
-      console.log(data);
       displayData(data);
     });
   },

@@ -11,12 +11,20 @@ export function dayOrNight(time, sunrise, sunset) {
     document.querySelector('body').style.transition = 'background-color 1000ms linear';
     document.querySelector('body').style.color = 'black';
     document.querySelector('.content').style.outline = '2px solid black';
+    document.querySelector('#location').style.border = '1px solid black';
+    document.querySelector('#location').style.color = 'black';
+    document.querySelector('#submit').style.border = '1px solid black';
+    document.querySelector('#submit').style.color = 'black';
     return 'day';
   }
   document.querySelector('body').style.backgroundColor = '#101028';
   document.querySelector('body').style.transition = 'background-color 1000ms linear';
   document.querySelector('body').style.color = 'white';
   document.querySelector('.content').style.outline = '2px solid white';
+  document.querySelector('#location').style.border = '1px solid white';
+  document.querySelector('#location').style.color = 'white';
+  document.querySelector('#submit').style.border = '1px solid white';
+  document.querySelector('#submit').style.color = 'white';
   return 'night';
 }
 export function windDirection(degrees) {
