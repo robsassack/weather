@@ -1,8 +1,14 @@
 export function kelvinToFahrenheit(kelvin) {
   return ((kelvin - 273.15) * 1.8 + 32).toFixed(0);
 }
+export function kelvinToCelsius(kelvin) {
+  return (kelvin - 273.15).toFixed(0);
+}
 export function meterSecToMilesHour(meterSec) {
   return (meterSec * 2.237).toFixed(0);
+}
+export function meterSecToKmHour(meterSec) {
+  return (meterSec * 3.6).toFixed(0);
 }
 export function dayOrNight(time, sunrise, sunset) {
   const currentTime = time / 1000;

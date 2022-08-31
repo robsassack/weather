@@ -3,7 +3,9 @@ import './styles.css';
 import 'weather-icons/css/weather-icons.css';
 import conditionIcon from './conditionIcon';
 import {
-  dayOrNight, kelvinToFahrenheit, windDirection, meterSecToMilesHour,
+  dayOrNight, kelvinToFahrenheit,
+  kelvinToCelsius, windDirection,
+  meterSecToMilesHour, meterSecToKmHour,
 } from './conversions';
 
 const locationInput = document.querySelector('#location');
@@ -78,12 +80,14 @@ function displayData(data) {
   tempScaleChooser.addEventListener('click', () => {
     if (tempScaleChooser.textContent === '°F') {
       tempScaleChooser.textContent = '°C';
-      temperature.textContent = `${Math.round((kelvinToFahrenheit(data.main.temp) - 32) / 1.8)}°`;
-      highLow.textContent = `High: ${Math.round((kelvinToFahrenheit(data.main.temp_max) - 32) / 1.8)}° | Low: ${Math.round((kelvinToFahrenheit(data.main.temp_min) - 32) / 1.8)}°`;
+      temperature.textContent = `${kelvinToCelsius(data.main.temp)}°`;
+      highLow.textContent = `High: ${kelvinToCelsius(data.main.temp_max)}° | Low: ${kelvinToCelsius(data.main.temp_min)}°`;
+      wind.textContent = `Wind: ${windDirection(data.wind.deg)} ${meterSecToKmHour(data.wind.speed)} km/h`;
     } else {
       tempScaleChooser.textContent = '°F';
       temperature.textContent = `${kelvinToFahrenheit(data.main.temp)}°`;
       highLow.textContent = `High: ${kelvinToFahrenheit(data.main.temp_max)}° | Low: ${kelvinToFahrenheit(data.main.temp_min)}°`;
+      wind.textContent = `Wind: ${windDirection(data.wind.deg)} ${meterSecToMilesHour(data.wind.speed)} mph`;
     }
   });
 }
