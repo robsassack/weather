@@ -68,6 +68,11 @@ function displayData(data) {
   const tempScaleChooser = document.createElement('div');
   tempScaleChooser.className = 'temp-scale-chooser';
   tempScaleChooser.innerHTML = '°F';
+  if (time === 'day') {
+    tempScaleChooser.style.border = '1px solid black';
+  } else {
+    tempScaleChooser.style.border = '1px solid white';
+  }
   content.appendChild(tempScaleChooser);
 
   tempScaleChooser.addEventListener('click', () => {
