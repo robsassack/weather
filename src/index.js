@@ -64,6 +64,23 @@ function displayData(data) {
   const wind = document.createElement('p');
   wind.textContent = `Wind: ${windDirection(data.wind.deg)} ${meterSecToMilesHour(data.wind.speed)} mph`;
   content.appendChild(wind);
+
+  const tempScaleChooser = document.createElement('div');
+  tempScaleChooser.className = 'temp-scale-chooser';
+  tempScaleChooser.innerHTML = '°F';
+  content.appendChild(tempScaleChooser);
+
+  tempScaleChooser.addEventListener('click', () => {
+    if (tempScaleChooser.textContent === '°F') {
+      tempScaleChooser.textContent = '°C';
+      temperature.textContent = `${Math.round((kelvinToFahrenheit(data.main.temp) - 32) / 1.8)}°`;
+      highLow.textContent = `High: ${Math.round((kelvinToFahrenheit(data.main.temp_max) - 32) / 1.8)}° | Low: ${Math.round((kelvinToFahrenheit(data.main.temp_min) - 32) / 1.8)}°`;
+    } else {
+      tempScaleChooser.textContent = '°F';
+      temperature.textContent = `${kelvinToFahrenheit(data.main.temp)}°`;
+      highLow.textContent = `High: ${kelvinToFahrenheit(data.main.temp_max)}° | Low: ${kelvinToFahrenheit(data.main.temp_min)}°`;
+    }
+  });
 }
 
 navigator.geolocation.getCurrentPosition(
